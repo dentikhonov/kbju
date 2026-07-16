@@ -230,7 +230,7 @@
 
   // ---------- настройки ----------
   const getKey = () => localStorage.getItem(LS_KEY) || '';
-  const getModel = () => localStorage.getItem(LS_MODEL) || 'gemini-2.5-flash';
+  const getModel = () => localStorage.getItem(LS_MODEL) || 'gemini-3.1-flash-lite';
 
   function showSettings(show) {
     $('settings').classList.toggle('hidden', !show);
@@ -244,7 +244,7 @@
     const key = $('apiKey').value.trim();
     if (!key) { alert('Введите API-ключ'); return; }
     localStorage.setItem(LS_KEY, key);
-    localStorage.setItem(LS_MODEL, $('model').value.trim() || 'gemini-2.5-flash');
+    localStorage.setItem(LS_MODEL, $('model').value.trim() || 'gemini-3.1-flash-lite');
     showSettings(false);
   };
 
