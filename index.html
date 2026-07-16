@@ -23,6 +23,9 @@
     --accent-soft: #eaf2ec;
     --danger: #b0413e;
     --radius: 14px;
+    --c-prot: #2e7d43;
+    --c-fat: #3565b0;
+    --c-carb: #b0611f;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html {
@@ -92,15 +95,52 @@
   .day-total { font-size: 14px; font-weight: 700; }
   .day-total small { color: var(--muted); font-weight: 500; }
   .entry {
-    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 12px;
     background: var(--card); border: 1px solid var(--line);
-    border-radius: 10px; padding: 10px 12px; margin-bottom: 8px;
+    border-radius: 12px; padding: 12px 14px; margin-bottom: 8px;
   }
-  .entry-info { min-width: 0; }
+  .entry-info { flex: 1; min-width: 0; }
+  .entry-top { display: flex; align-items: baseline; gap: 8px; }
   .entry-name { font-weight: 600; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .entry-macros { font-size: 12.5px; color: var(--muted); }
-  .entry-kcal { font-weight: 700; white-space: nowrap; }
+  .entry-time { font-size: 12px; color: var(--muted); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .entry-chips { display: flex; gap: 12px; margin-top: 5px; }
+  .chip { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+  .chip i { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .chip.p i { background: var(--c-prot); }
+  .chip.f i { background: var(--c-fat); }
+  .chip.c i { background: var(--c-carb); }
+  .entry-kcal { font-weight: 700; font-size: 17px; line-height: 1.15; text-align: right; white-space: nowrap; }
+  .entry-kcal small { display: block; font-size: 10px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
   .entry-del { background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; padding: 4px; }
+
+  /* переключатель Дневник / Аналитика */
+  .seg { display: flex; background: var(--accent-soft); border-radius: 12px; padding: 3px; margin-top: 20px; }
+  .seg button {
+    flex: 1; border: none; background: none; padding: 8px; border-radius: 10px;
+    font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer;
+  }
+  .seg button.active { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+
+  /* аналитика */
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 8px; text-align: center; }
+  .stat b { display: block; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 11px; color: var(--muted); }
+  .chart-title { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px; }
+  .bars { display: flex; align-items: flex-end; gap: 6px; height: 110px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px; min-width: 0; }
+  .bar-val { font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1; }
+  .bar { width: 100%; max-width: 36px; background: var(--accent); border-radius: 4px 4px 0 0; }
+  .bar.empty { background: var(--line); }
+  .bars-x { display: flex; gap: 6px; margin-top: 6px; }
+  .bars-x span { flex: 1; text-align: center; font-size: 11px; color: var(--muted); }
+  .bars-x span.today { color: var(--ink); font-weight: 700; }
+  .mbar { display: flex; height: 14px; gap: 2px; margin-bottom: 12px; }
+  .mbar div { border-radius: 4px; min-width: 6px; }
+  .mrow { display: flex; justify-content: space-between; align-items: center; margin-top: 7px; font-size: 13.5px; }
+  .mrow .chip { font-size: 13.5px; color: var(--ink); }
+  .mrow b { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .mrow b small { color: var(--muted); font-weight: 500; }
 
   .status { text-align: center; color: var(--muted); padding: 14px; font-size: 14px; }
   .error { color: var(--danger); font-size: 14px; margin-top: 10px; white-space: pre-wrap; }
@@ -135,6 +175,9 @@
       --accent: #5da672;
       --accent-soft: #24352a;
       --danger: #d97a76;
+      --c-prot: #4da368;
+      --c-fat: #6b95d6;
+      --c-carb: #c67e2f;
     }
     input { background: var(--card); }
     .btn { color: #10160f; }
@@ -150,6 +193,9 @@
     --accent: #5da672;
     --accent-soft: #24352a;
     --danger: #d97a76;
+    --c-prot: #4da368;
+    --c-fat: #6b95d6;
+    --c-carb: #c67e2f;
   }
   :root[data-theme="dark"] input { background: var(--card); }
   :root[data-theme="dark"] .btn { color: #10160f; }
@@ -164,6 +210,9 @@
     --accent: #2f6b3f;
     --accent-soft: #eaf2ec;
     --danger: #b0413e;
+    --c-prot: #2e7d43;
+    --c-fat: #3565b0;
+    --c-carb: #b0611f;
   }
   :root[data-theme="light"] input { background: #fff; }
   :root[data-theme="light"] .btn { color: #fff; }
@@ -193,7 +242,27 @@
 <!-- Главный экран -->
 <div id="main" class="hidden">
   <input type="file" id="file" accept="image/*" capture="environment" class="hidden">
-  <button class="btn" id="btnPhoto">📷 Сфотографировать еду</button>
+  <div class="row" style="margin-top:0">
+    <button class="btn" id="btnPhoto">📷 Фото</button>
+    <button class="btn secondary" id="btnManual">✏️ Вручную</button>
+  </div>
+
+  <!-- Ручное добавление -->
+  <div class="card hidden" id="manual" style="margin-top:14px">
+    <label>Название</label>
+    <input id="manName" type="text" placeholder="Например: гречка с курицей">
+    <label>КБЖУ порции</label>
+    <div class="macros">
+      <div class="macro"><input id="manKcal" type="number" inputmode="numeric" placeholder="0"><span>ккал</span></div>
+      <div class="macro"><input id="manProt" type="number" inputmode="numeric" placeholder="0"><span>белки</span></div>
+      <div class="macro"><input id="manFat"  type="number" inputmode="numeric" placeholder="0"><span>жиры</span></div>
+      <div class="macro"><input id="manCarb" type="number" inputmode="numeric" placeholder="0"><span>углев.</span></div>
+    </div>
+    <div class="row">
+      <button class="btn secondary" id="btnManCancel">Отмена</button>
+      <button class="btn" id="btnManSave">Записать</button>
+    </div>
+  </div>
 
   <div class="card hidden" id="loading" style="margin-top:14px">
     <div class="spinner"></div>
@@ -219,7 +288,12 @@
     </div>
   </div>
 
+  <div class="seg" id="tabs">
+    <button class="active" data-tab="log">Дневник</button>
+    <button data-tab="analytics">Аналитика</button>
+  </div>
   <div id="log"></div>
+  <div id="analytics" class="hidden"></div>
 </div>
 
 <script>
@@ -354,22 +428,51 @@ kcal — калории всей порции на фото, prot/fat/carb — �
 
   $('btnDiscard').onclick = () => { pending = null; $('result').classList.add('hidden'); };
 
-  $('btnSave').onclick = () => {
-    if (!pending) return;
+  function addEntry(name, kcal, prot, fat, carb) {
     const log = loadLog();
     log.push({
       id: Date.now(),
       ts: new Date().toISOString(),
-      name: $('dishName').textContent,
-      kcal: +$('mKcal').value || 0,
-      prot: +$('mProt').value || 0,
-      fat:  +$('mFat').value  || 0,
-      carb: +$('mCarb').value || 0
+      name, kcal, prot, fat, carb
     });
     saveLog(log);
+    renderLog();
+    renderAnalytics();
+  }
+
+  $('btnSave').onclick = () => {
+    if (!pending) return;
+    addEntry(
+      $('dishName').textContent,
+      +$('mKcal').value || 0,
+      +$('mProt').value || 0,
+      +$('mFat').value  || 0,
+      +$('mCarb').value || 0
+    );
     pending = null;
     $('result').classList.add('hidden');
-    renderLog();
+  };
+
+  // ---------- ручное добавление ----------
+  $('btnManual').onclick = () => {
+    $('manual').classList.toggle('hidden');
+    if (!$('manual').classList.contains('hidden')) $('manName').focus();
+  };
+
+  $('btnManCancel').onclick = () => $('manual').classList.add('hidden');
+
+  $('btnManSave').onclick = () => {
+    const name = $('manName').value.trim();
+    if (!name) { alert('Введите название блюда'); return; }
+    addEntry(
+      name,
+      +$('manKcal').value || 0,
+      +$('manProt').value || 0,
+      +$('manFat').value  || 0,
+      +$('manCarb').value || 0
+    );
+    for (const id of ['manName', 'manKcal', 'manProt', 'manFat', 'manCarb']) $(id).value = '';
+    $('manual').classList.add('hidden');
   };
 
   // ---------- дневник ----------
@@ -412,19 +515,118 @@ kcal — калории всей порции на фото, prot/fat/carb — �
         el.className = 'entry';
         el.innerHTML = `
           <div class="entry-info">
-            <div class="entry-name"></div>
-            <div class="entry-macros">Б ${e.prot} · Ж ${e.fat} · У ${e.carb}</div>
+            <div class="entry-top">
+              <span class="entry-name"></span>
+              <span class="entry-time"></span>
+            </div>
+            <div class="entry-chips">
+              <span class="chip p"><i></i>Б ${e.prot}</span>
+              <span class="chip f"><i></i>Ж ${e.fat}</span>
+              <span class="chip c"><i></i>У ${e.carb}</span>
+            </div>
           </div>
-          <div class="entry-kcal">${e.kcal}</div>
+          <div class="entry-kcal">${e.kcal}<small>ккал</small></div>
           <button class="entry-del" title="Удалить">✕</button>`;
         el.querySelector('.entry-name').textContent = e.name;
+        el.querySelector('.entry-time').textContent = e.ts
+          ? new Date(e.ts).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+          : '—';
         el.querySelector('.entry-del').onclick = () => {
           saveLog(loadLog().filter(x => x.id !== e.id));
           renderLog();
+          renderAnalytics();
         };
         box.appendChild(el);
       }
     }
+  }
+
+  // ---------- вкладки ----------
+  $('tabs').onclick = (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    for (const b of $('tabs').querySelectorAll('button')) b.classList.toggle('active', b === btn);
+    $('log').classList.toggle('hidden', btn.dataset.tab !== 'log');
+    $('analytics').classList.toggle('hidden', btn.dataset.tab !== 'analytics');
+  };
+
+  // ---------- аналитика ----------
+  function renderAnalytics() {
+    const box = $('analytics');
+    const log = loadLog();
+    if (!log.length) {
+      box.innerHTML = '<div class="status">Пока нет данных. Запиши хотя бы одно блюдо.</div>';
+      return;
+    }
+
+    // суммы по последним 7 дням
+    const days = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(); d.setDate(d.getDate() - i);
+      days.push(d);
+    }
+    const totals = days.map(d => {
+      const key = d.toDateString();
+      const t = { kcal: 0, prot: 0, fat: 0, carb: 0, n: 0 };
+      for (const e of log) {
+        if (new Date(e.ts).toDateString() !== key) continue;
+        t.kcal += e.kcal; t.prot += e.prot; t.fat += e.fat; t.carb += e.carb; t.n++;
+      }
+      return t;
+    });
+
+    const active = totals.filter(t => t.n > 0);
+    const avgKcal = active.length ? Math.round(active.reduce((a, t) => a + t.kcal, 0) / active.length) : 0;
+    const today = totals[totals.length - 1];
+    const week = totals.reduce((a, t) => ({
+      prot: a.prot + t.prot, fat: a.fat + t.fat, carb: a.carb + t.carb, n: a.n + t.n
+    }), { prot: 0, fat: 0, carb: 0, n: 0 });
+
+    // распределение калорий по макросам за 7 дней
+    const calP = week.prot * 4, calF = week.fat * 9, calC = week.carb * 4;
+    const calSum = calP + calF + calC || 1;
+    const pct = v => Math.round(v / calSum * 100);
+
+    // столбики: подписи значений только у сегодня и у максимума
+    const maxKcal = Math.max(...totals.map(t => t.kcal), 1);
+    const maxIdx = totals.reduce((mi, t, i) => t.kcal > totals[mi].kcal ? i : mi, 0);
+    const bars = totals.map((t, i) => {
+      const h = Math.max(Math.round(t.kcal / maxKcal * 100), t.n ? 3 : 2);
+      const showVal = t.n && (i === totals.length - 1 || i === maxIdx);
+      return `<div class="bar-col" title="${days[i].toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}: ${t.kcal} ккал">
+        <span class="bar-val">${showVal ? t.kcal : ''}</span>
+        <div class="bar${t.n ? '' : ' empty'}" style="height:${h}%"></div>
+      </div>`;
+    }).join('');
+    const xLabels = days.map((d, i) =>
+      `<span${i === days.length - 1 ? ' class="today"' : ''}>${d.toLocaleDateString('ru-RU', { weekday: 'short' })}</span>`
+    ).join('');
+
+    const mrow = (cls, name, grams, p) =>
+      `<div class="mrow"><span class="chip ${cls}"><i></i>${name}</span><b>${grams} г <small>· ${p}%</small></b></div>`;
+
+    box.innerHTML = `
+      <div class="stat-grid">
+        <div class="stat"><b>${today.kcal}</b><span>ккал сегодня</span></div>
+        <div class="stat"><b>${avgKcal}</b><span>ккал / день</span></div>
+        <div class="stat"><b>${week.n}</b><span>блюд за 7 дней</span></div>
+      </div>
+      <div class="card">
+        <div class="chart-title">Калории за 7 дней</div>
+        <div class="bars">${bars}</div>
+        <div class="bars-x">${xLabels}</div>
+      </div>
+      <div class="card">
+        <div class="chart-title">Калории из макросов · 7 дней</div>
+        <div class="mbar">
+          <div style="width:${pct(calP)}%;background:var(--c-prot)"></div>
+          <div style="width:${pct(calF)}%;background:var(--c-fat)"></div>
+          <div style="width:${pct(calC)}%;background:var(--c-carb)"></div>
+        </div>
+        ${mrow('p', 'Белки', week.prot, pct(calP))}
+        ${mrow('f', 'Жиры', week.fat, pct(calF))}
+        ${mrow('c', 'Углеводы', week.carb, pct(calC))}
+      </div>`;
   }
 
   // ---------- ошибки ----------
@@ -434,6 +636,7 @@ kcal — калории всей порции на фото, prot/fat/carb — �
   // ---------- старт ----------
   if (!getKey()) showSettings(true); else $('main').classList.remove('hidden');
   renderLog();
+  renderAnalytics();
 })();
 </script>
 
